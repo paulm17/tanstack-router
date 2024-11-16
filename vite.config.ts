@@ -20,18 +20,20 @@ export default defineConfig({
       atomic: false,
       theme,
       rawTheme,
-      transformLibraries: ['@raikou/core', '@raikou/system'],
+      transformLibraries: ['@raikou/core', '@raikou/system', '@raikou/emotion'],
     }),
     TanStackRouterVite({}),
     react(),
   ],
   optimizeDeps: {
-    include: ['prop-types', 'react-is'],
+    include: [
+      'prop-types', 
+      'react-is', 
+      'hoist-non-react-statics', 
+      'html-react-parser'
+    ],
   },
-  resolve: {
-    alias: {
-      'prop-types': 'prop-types/prop-types.js',
-      'react-is': 'react-is/cjs/react-is.development.js',
-    },
+  ssr: {
+    noExternal: ['@stylefusion/react', '@raikou/core', '@raikou/system', '@raikou/emotion'],
   },
 });
